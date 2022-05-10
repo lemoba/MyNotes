@@ -34,5 +34,8 @@ module.exports = [
     },
     {
         text: '随笔', link: '/blog/'
+    },
+    {
+        text: 'github', link: 'https://github.com/lemoba'
     }
 ]
