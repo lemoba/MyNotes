@@ -1,10 +1,10 @@
-FROM node:18.1.0-alpine
+FROM node:14.17.6-alpine3.13
 
 WORKDIR /var/www
 
 COPY . /var/www
 
-RUN npm install -g yarn && yarn install
+RUN yarn install
 
 EXPOSE 8888
 
