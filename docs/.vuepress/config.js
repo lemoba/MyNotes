@@ -7,7 +7,6 @@ module.exports = {
     markdown: {
       lineNumbers: true,
     },
-    port: 8888,
     themeConfig: {
       logo: '/img/rust.svg',
       nav: require("./nav.js"),

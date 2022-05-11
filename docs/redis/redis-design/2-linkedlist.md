@@ -1,10 +1,3 @@
----
-rightAnchor: 
-  showDepth: 2
-  expand:
-    trigger: click
-    clickModeDefaultOpen: false
----
 # 简单动态字符串
 
 > Redis没有直接使用C语言的字符串表示，而是构建了一套简单动态字符串(SDS)的抽象类型，并将SDS用作Redis的默认字符串表示

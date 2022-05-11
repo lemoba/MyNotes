@@ -1,12 +1,3 @@
----
-rightAnchor: 
-  showDepth: 2
-  expand:
-    trigger: click
-    clickModeDefaultOpen: false
-prev: false
-next: ./linkedlist
----
 
 # 简单动态字符串
 
