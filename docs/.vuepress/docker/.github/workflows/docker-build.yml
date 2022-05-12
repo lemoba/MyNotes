@@ -27,4 +27,4 @@ jobs:
         with:
           push: true
           platforms: linux/arm64
-          tags: ranen1024/myblog:latest
+          tags: ranen1024/my-notes:latest

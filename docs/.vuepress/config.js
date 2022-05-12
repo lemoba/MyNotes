@@ -1,6 +1,6 @@
 module.exports = {
     title: 'Ranen',
-    description: '心中无女人, 代码自然神',
+    description: '心中无女人, 代码自然神!',
     head: [
       ["link", { rel: "icon", href: "/img/rust.svg" }],
     ],
