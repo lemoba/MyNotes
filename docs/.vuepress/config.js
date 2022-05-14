@@ -1,6 +1,6 @@
 module.exports = {
     title: 'Ranen',
-    description: '心中无女人, 代码自然神!',
+    description: '心中无女人，代码自然神!',
     head: [
       ["link", { rel: "icon", href: "/img/rust.svg" }],
     ],
@@ -20,12 +20,22 @@ module.exports = {
           buttonText: "更新",
         },
       },
+      repo: 'https://github.com/lemoba/lemoba.github.io',
+      repoLabel: '',
+      docsDir: 'docs',
+      docsBranch: 'main',
       editLinks: true,
       editLinkText: "在 GitHub 上编辑此页 ！",
     },
     plugins: [
       '@vuepress/back-to-top',
-      'vuepress-plugin-right-anchor'
+      'vuepress-plugin-right-anchor',
+      ['vuepress-plugin-code-copy', {
+          align: 'top',
+          backgroundTransition: false,
+          successText: '已复制!'
+        }
+      ]
     ]
 
 }

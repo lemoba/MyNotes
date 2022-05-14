@@ -28,14 +28,20 @@ module.exports = [
     {
         text: '编程语言',
         items: [
+            {text: 'PHP', link: ''},
             {text: 'Golang', link: ''},
             {text: 'Rust', link: ''},
         ]
     },
     {
-        text: '随笔', link: '/blog/'
+        text: '其他工具',
+        items: [
+            {text: 'Git', link: ''},
+            {text: 'Docker', link: ''},
+            {text: 'RabbitMQ', link: ''},
+        ]
     },
     {
-        text: 'github', link: 'https://github.com/lemoba'
-    }
+        text: '随笔', link: '/blog/'
+    },
 ]

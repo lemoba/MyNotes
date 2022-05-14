@@ -1,11 +1,21 @@
 const { title } = require("../.vuepress/config");
 module.exports = [
   {
+    title: "Redis开发与运维",
+    collapsable: true,
+    children: [
+      { title: "安装", path: "/redis/redis-develop/1-install"},
+      { title: "复制", path: "/redis/redis-develop/2-replication"},
+      { title: "哨兵", path: "/redis/redis-develop/3-sentinel"},
+    ]
+  },
+  {
     title: "Redis设计与实现",
     collapsable: true,
     children: [
       { title: "简单动态字符串", path: "/redis/redis-design/1-sds"},
       { title: "链表", path: "/redis/redis-design/2-linkedlist" },
+      { title: "字典", path: "/redis/redis-design/3-dict" },
     //   { title: "跳表", path: "/redis/redis-design/sds" },
     //   { title: "整数集合", path: "/redis/redis-design/sds" },
     //   { title: "压缩列表", path: "/redis/redis-design/sds" },
@@ -27,15 +37,6 @@ module.exports = [
     //   { title: "慢查询日志", path: "/redis/redis-design/sds" },
     //   { title: "监视器", path: "/redis/redis-design/sds" },
     ],
-  },
-  {
-    title: "Redis开发与运维",
-    collapsable: true,
-    children: [
-      { title: "安装", path: "/redis/redis-develop/1-install"},
-      { title: "复制", path: "/redis/redis-develop/2-replication"},
-      { title: "哨兵", path: "/redis/redis-develop/3-sentinel"},
-    ]
   },
   {
     title: "Redis45讲",
