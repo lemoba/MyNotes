@@ -4,9 +4,10 @@ module.exports = [
     title: "Redis开发与运维",
     collapsable: true,
     children: [
-      { title: "安装", path: "/redis/redis-develop/1-install"},
-      { title: "复制", path: "/redis/redis-develop/2-replication"},
-      { title: "哨兵", path: "/redis/redis-develop/3-sentinel"},
+      { title: "安装", path: "/redis/redis-devops/1-install"},
+      { title: "持久化", path: "/redis/redis-devops/2-persistence"},
+      { title: "复制", path: "/redis/redis-devops/3-replication"},
+      { title: "哨兵", path: "/redis/redis-devops/4-sentinel"},
     ]
   },
   {

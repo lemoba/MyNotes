@@ -12,9 +12,9 @@
 | Redis Sentinel   | redis高可用解决方案          | sentinel节点集合和redis数据节点进程 |
 | 应用方           | 一个或多个客户端             | 一个或多个客户端进程                |
 
-## 5.1 主从复制的问题
+## 1. 主从复制的问题
 
-### ① 什么是主从复制？
+### 1.1 什么是主从复制？
 
 > 启动两个独立的redis进程，一个为主节点另一个为从节点。在主从复制模式下，可以将主节点的数据改变同步给从节点
 
@@ -29,7 +29,7 @@
 * 主节点性能受单机的限制
 * 主节点的存储能力受单机的限制
 
-### ② 高可用
+### 1.2 高可用
 
 **如何进行故障转移**
 
@@ -43,7 +43,7 @@
 * 一旦出现节点故障，需要人工干预进行故障转移
 * 应用方无法即时感知到主节点的变化，从而造成一定的写数据丢失和读数据错误
 
-## 5.2 Redis Sentinel的高可用
+## 2. Redis Sentinel的高可用
 
 > Redis Sentinel是一个分布式架构，其中包含若干个Sentinel节点和Redis数据节点，每个Sentinel节点会对数据节点和其他Sentinel节点监控
 
@@ -57,9 +57,9 @@
 * 当发现节点不可达时，会对节点做下线标识
 * 当被标识的节点是主节点时，它会和其他Sentinel节点进行协商(多数同意)，然后选举出一个Sentinel节点完成自动故障转移的工作，同时通知给应用方
 
-## 5.3 部署和安装
+## 3. 部署和安装
 
-### ① 部署数据节点
+### 3.1 部署数据节点
 
 **配置文件**
 
@@ -150,7 +150,7 @@ slave_read_only:1
 ...
 ```
 
-### ② 部署Sentinel节点
+### 3.2 部署Sentinel节点
 
 **配置文件**
 
@@ -246,7 +246,7 @@ sentinel_simulate_failure_flags:0
 master0:name=mymaster,status=ok,address=127.0.0.1:6379,slaves=2,sentinels=3
 ```
 
-### ③ 配置参数
+### 3.3 配置参数
 
 ```shell
 # 设置监控的主节点 <master-name> <ip> <port> <quorum>
@@ -281,7 +281,7 @@ sentinel notification-script <master-name> <script>
 sentinel client-reconfig-script <master-name> <script>    
 ```
 
-## 5.4 API
+## 4. API
 
 **1. sentinel masters**
 
@@ -354,9 +354,9 @@ sentinel slaves mymaster
    10) "slave"
 ....
 ```
-### 5.5 实现原理
+### 5. 实现原理
 
-#### ① 三个定时任务
+#### 5.1 三个定时任务
 
 > Redis Sentinel通过三个定时监控任务完成对各个节点发现和监控
 
@@ -395,7 +395,7 @@ repl_backlog_histlen:8591
 
 **3）每隔1秒，每个Sentinel节点会向主节点、从节点、其他Sentinel节点发送一条ping命令做一次心跳检测，来确认这个节点当前是否可达**
 
-#### ② 主/客观下线
+#### 5.2 主/客观下线
 
 **1）主观下线**
 
@@ -407,7 +407,7 @@ repl_backlog_histlen:8591
 
 当Sentinel主观下线的节点时主节点时，改Sentinel节点会通过**sentinel is-master-down-by-addr**命令向其他Sentinel节点询问对主节点的判断，当超过quronum个数，Sentinel节点认为主节点确实有问题，这是便做出客观下线的决定。
 
-### ③ Sentinel领导选举
+### 5.3 Sentinel领导选举
 
 > Redis Sentinel使用Raft算法实现领导者选举
 
@@ -422,7 +422,7 @@ repl_backlog_histlen:8591
 
 **notes：**每个Sentinel节点只有一次投票权
 
-### ④ 故障转移
+### 5.4 故障转移
 
 **1）从节点列表中选出一个节点作为新的节点作为新的主节点，选择方法如下**
 
