@@ -17,7 +17,7 @@ module.exports = [
       { title: "链表", path: "/redis/redis-design/2-linkedlist" },
       { title: "字典", path: "/redis/redis-design/3-dict" },
       { title: "跳表", path: "/redis/redis-design/4-skiplist" },
-    //   { title: "整数集合", path: "/redis/redis-design/sds" },
+      { title: "整数集合", path: "/redis/redis-design/5-intset" },
     //   { title: "压缩列表", path: "/redis/redis-design/sds" },
     //   { title: "对象", path: "/redis/redis-design/sds" },
       { title: "数据库", path: "/redis/redis-design/8-database" },
