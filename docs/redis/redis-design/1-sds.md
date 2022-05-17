@@ -1,5 +1,5 @@
 ---
-prev: ../redis-develop/1-install
+prev: ../redis-devops/1-install
 ---
 # 简单动态字符串
 
