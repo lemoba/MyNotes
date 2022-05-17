@@ -16,7 +16,7 @@ module.exports = [
       { title: "简单动态字符串", path: "/redis/redis-design/1-sds"},
       { title: "链表", path: "/redis/redis-design/2-linkedlist" },
       { title: "字典", path: "/redis/redis-design/3-dict" },
-    //   { title: "跳表", path: "/redis/redis-design/sds" },
+      { title: "跳表", path: "/redis/redis-design/4-skiplist" },
     //   { title: "整数集合", path: "/redis/redis-design/sds" },
     //   { title: "压缩列表", path: "/redis/redis-design/sds" },
     //   { title: "对象", path: "/redis/redis-design/sds" },

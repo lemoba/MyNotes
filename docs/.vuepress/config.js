@@ -29,13 +29,13 @@ module.exports = {
     },
     plugins: [
       '@vuepress/back-to-top',
-      'vuepress-plugin-right-anchor',
+      'vuepress-plugin-right-anchor',  
       ['vuepress-plugin-code-copy', {
-          align: 'top',
           backgroundTransition: false,
           successText: '已复制!'
         }
-      ]
+      ],
+      'vuepress-plugin-element-tabs',
     ]
 
 }
