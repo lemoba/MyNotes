@@ -8,7 +8,6 @@ module.exports = [
             {text: '操作系统', link: ''},
             {text: '计算机网络', link: ''},
             {text: '数据结构与算法', link: ''},
-            {text: '编译原理', link: ''},
         ]
     },
     {
@@ -26,6 +25,12 @@ module.exports = [
         ]
     },
     {
+        text: '中间件',
+        items: [
+            {text: '消息中间件', link: '/middleware/mq/'},
+        ]
+    },
+    {
         text: '编程语言',
         items: [
             {text: 'PHP', link: ''},
@@ -37,8 +42,7 @@ module.exports = [
         text: '其他工具',
         items: [
             {text: 'Git', link: ''},
-            {text: 'Docker', link: ''},
-            {text: 'RabbitMQ', link: ''},
+            {text: 'Docker', link: ''},    
         ]
     },
     {
