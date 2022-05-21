@@ -11,6 +11,14 @@ module.exports = [
     ]
   },
   {
+    title: "Redis45讲",
+    collapsable: true,
+    children: [
+      { title: "基本架构", path: "/redis/redis-45/1-basic"},
+      { title: "缓存异常", path: "/redis/redis-45/25-exception-cache"},
+    ]
+  },
+  {
     title: "Redis设计与实现",
     collapsable: true,
     children: [
@@ -39,12 +47,5 @@ module.exports = [
     //   { title: "监视器", path: "/redis/redis-design/sds" },
     ],
   },
-  {
-    title: "Redis45讲",
-    collapsable: true,
-    children: [
-      { title: "基本架构", path: "/redis/redis-45/1-basic"},
-      { title: "缓存异常", path: "/redis/redis-45/25-exception-cache"},
-    ]
-  }
+  
 ];
