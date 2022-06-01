@@ -33,19 +33,17 @@ module.exports = [
     {
         text: '编程语言',
         items: [
-            {text: 'PHP', link: ''},
+            {text: 'PHP', link: '/php/'},
             {text: 'Golang', link: ''},
-            {text: 'Rust', link: ''},
         ]
     },
     {
         text: '其他工具',
         items: [
-            {text: 'Git', link: ''},
-            {text: 'Docker', link: ''},    
+            {text: 'Docker', link: '/docker/'},    
         ]
     },
     {
-        text: '随笔', link: '/blog/'
+        text: '书籍📚', link: '/book/'
     },
 ]
