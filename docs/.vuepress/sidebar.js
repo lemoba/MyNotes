@@ -4,5 +4,6 @@ module.exports = {
     '/mysql/': require('../mysql/sidebar'),
     '/php/': require('../php/sidebar'),
     '/docker/': require('../docker/sidebar'),
+    '/network/': require('../network/sidebar'),
     '/middleware/mq/': require('../middleware/mq/sidebar'),
 }   

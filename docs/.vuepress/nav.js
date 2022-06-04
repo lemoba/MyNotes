@@ -6,7 +6,7 @@ module.exports = [
         text: '计算机基础',
         items: [
             {text: '操作系统', link: ''},
-            {text: '计算机网络', link: ''},
+            {text: '计算机网络', link: '/network/'},
             {text: '数据结构与算法', link: ''},
         ]
     },
