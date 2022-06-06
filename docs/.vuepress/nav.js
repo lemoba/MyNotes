@@ -5,9 +5,9 @@ module.exports = [
     {
         text: '计算机基础',
         items: [
-            {text: '操作系统', link: '/os/'},
+            // {text: '操作系统', link: '/os/'},
             {text: '计算机网络', link: '/network/'},
-            {text: '数据结构与算法', link: '/datastruct/'},
+            {text: '数据结构与算法', link: '/data-struct/'},
         ]
     },
     {
@@ -20,8 +20,7 @@ module.exports = [
     {
         text: '微服务',
         items: [
-            {text: '10天入门微服务', link: ''},
-            {text: '', link: ''},
+            {text: '10天入门微服务', link: '/micro-service/'},
         ]
     },
     {
@@ -34,7 +33,6 @@ module.exports = [
         text: '编程语言',
         items: [
             {text: 'PHP', link: '/php/'},
-            {text: 'Golang', link: ''},
         ]
     },
     {
