@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>哨兵模式 | Ranen</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/img/rust.svg">
+    <meta name="description" content="心中无女人，代码自然神!">
+    
+    <link rel="preload" href="/assets/css/0.styles.3cd9c93a.css" as="style"><link rel="preload" href="/assets/js/app.d008bd4a.js" as="script"><link rel="preload" href="/assets/js/2.c3ba2a3e.js" as="script"><link rel="preload" href="/assets/js/76.f690a52c.js" as="script"><link rel="prefetch" href="/assets/js/10.faa6bfce.js"><link rel="prefetch" href="/assets/js/11.f0fe1ca6.js"><link rel="prefetch" href="/assets/js/12.2151f8a5.js"><link rel="prefetch" href="/assets/js/13.a2fea5af.js"><link rel="prefetch" href="/assets/js/14.c6d4de2e.js"><link rel="prefetch" href="/assets/js/15.20e64797.js"><link rel="prefetch" href="/assets/js/16.f56f20f0.js"><link rel="prefetch" href="/assets/js/17.1e46af76.js"><link rel="prefetch" href="/assets/js/18.9ae7a6bb.js"><link rel="prefetch" href="/assets/js/19.c46b6498.js"><link rel="prefetch" href="/assets/js/20.cca40775.js"><link rel="prefetch" href="/assets/js/21.d3e5a7ba.js"><link rel="prefetch" href="/assets/js/22.602e0ae3.js"><link rel="prefetch" href="/assets/js/23.b6888b28.js"><link rel="prefetch" href="/assets/js/24.1d2df3b8.js"><link rel="prefetch" href="/assets/js/25.a5c6f894.js"><link rel="prefetch" href="/assets/js/26.b21010fb.js"><link rel="prefetch" href="/assets/js/27.76239055.js"><link rel="prefetch" href="/assets/js/28.76a7745f.js"><link rel="prefetch" href="/assets/js/29.19047bf9.js"><link rel="prefetch" href="/assets/js/3.0631ff25.js"><link rel="prefetch" href="/assets/js/30.3113b243.js"><link rel="prefetch" href="/assets/js/31.602c3c3b.js"><link rel="prefetch" href="/assets/js/32.f8ed11bb.js"><link rel="prefetch" href="/assets/js/33.ab84d219.js"><link rel="prefetch" href="/assets/js/34.a076b5dd.js"><link rel="prefetch" href="/assets/js/35.62b57e22.js"><link rel="prefetch" href="/assets/js/36.fa3dfffc.js"><link rel="prefetch" href="/assets/js/37.75b06d9c.js"><link rel="prefetch" href="/assets/js/38.76de7bc7.js"><link rel="prefetch" href="/assets/js/39.e2bbb80e.js"><link rel="prefetch" href="/assets/js/4.fce9a1c8.js"><link rel="prefetch" href="/assets/js/40.308a9bab.js"><link rel="prefetch" href="/assets/js/41.abcbd411.js"><link rel="prefetch" href="/assets/js/42.851beb3b.js"><link rel="prefetch" href="/assets/js/43.4f78b213.js"><link rel="prefetch" href="/assets/js/44.a637b177.js"><link rel="prefetch" href="/assets/js/45.ab73dbaf.js"><link rel="prefetch" href="/assets/js/46.ca5c9dcf.js"><link rel="prefetch" href="/assets/js/47.1b703f6f.js"><link rel="prefetch" href="/assets/js/48.497d106b.js"><link rel="prefetch" href="/assets/js/49.aa947fd1.js"><link rel="prefetch" href="/assets/js/5.1afe1b42.js"><link rel="prefetch" href="/assets/js/50.1619450d.js"><link rel="prefetch" href="/assets/js/51.4a8bbb5e.js"><link rel="prefetch" href="/assets/js/52.13896369.js"><link rel="prefetch" href="/assets/js/53.c95dd6c1.js"><link rel="prefetch" href="/assets/js/54.e311182b.js"><link rel="prefetch" href="/assets/js/55.62d4600a.js"><link rel="prefetch" href="/assets/js/56.7b362db9.js"><link rel="prefetch" href="/assets/js/57.957660d2.js"><link rel="prefetch" href="/assets/js/58.d06655a2.js"><link rel="prefetch" href="/assets/js/59.b617420a.js"><link rel="prefetch" href="/assets/js/6.825b5dec.js"><link rel="prefetch" href="/assets/js/60.6d34ba53.js"><link rel="prefetch" href="/assets/js/61.798355d1.js"><link rel="prefetch" href="/assets/js/62.6927211f.js"><link rel="prefetch" href="/assets/js/63.18af289b.js"><link rel="prefetch" href="/assets/js/64.f0859c68.js"><link rel="prefetch" href="/assets/js/65.5d69faeb.js"><link rel="prefetch" href="/assets/js/66.56774680.js"><link rel="prefetch" href="/assets/js/67.ae3be620.js"><link rel="prefetch" href="/assets/js/68.62f4f62f.js"><link rel="prefetch" href="/assets/js/69.755abd99.js"><link rel="prefetch" href="/assets/js/7.5f2104e4.js"><link rel="prefetch" href="/assets/js/70.25fb9b3a.js"><link rel="prefetch" href="/assets/js/71.c47a9157.js"><link rel="prefetch" href="/assets/js/72.ecec8b88.js"><link rel="prefetch" href="/assets/js/73.219f23eb.js"><link rel="prefetch" href="/assets/js/74.44363d59.js"><link rel="prefetch" href="/assets/js/75.a82555da.js"><link rel="prefetch" href="/assets/js/8.a09537ae.js"><link rel="prefetch" href="/assets/js/9.3d642539.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3cd9c93a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/rust.svg" alt="Ranen" class="logo"> <span class="site-name can-hide">Ranen</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="计算机基础" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="计算机基础" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/data-struct/" class="nav-link">
+  数据结构与算法
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/redis/" class="nav-link router-link-active">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="微服务" class="dropdown-title"><span class="title">微服务</span> <span class="arrow down"></span></button> <button type="button" aria-label="微服务" class="mobile-dropdown-title"><span class="title">微服务</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/micro-service/" class="nav-link">
+  10天入门微服务
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="中间件" class="dropdown-title"><span class="title">中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="中间件" class="mobile-dropdown-title"><span class="title">中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/middleware/mq/" class="nav-link">
+  消息中间件
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="编程语言" class="dropdown-title"><span class="title">编程语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="编程语言" class="mobile-dropdown-title"><span class="title">编程语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/php/" class="nav-link">
+  PHP
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他工具" class="dropdown-title"><span class="title">其他工具</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他工具" class="mobile-dropdown-title"><span class="title">其他工具</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docker/" class="nav-link">
+  Docker
+</a></li></ul></div></div><div class="nav-item"><a href="/book/" class="nav-link">
+  书籍📚
+</a></div> <a href="https://github.com/lemoba/lemoba.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="计算机基础" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="计算机基础" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/network/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/data-struct/" class="nav-link">
+  数据结构与算法
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="数据库" class="dropdown-title"><span class="title">数据库</span> <span class="arrow down"></span></button> <button type="button" aria-label="数据库" class="mobile-dropdown-title"><span class="title">数据库</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/redis/" class="nav-link router-link-active">
+  Redis
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="微服务" class="dropdown-title"><span class="title">微服务</span> <span class="arrow down"></span></button> <button type="button" aria-label="微服务" class="mobile-dropdown-title"><span class="title">微服务</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/micro-service/" class="nav-link">
+  10天入门微服务
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="中间件" class="dropdown-title"><span class="title">中间件</span> <span class="arrow down"></span></button> <button type="button" aria-label="中间件" class="mobile-dropdown-title"><span class="title">中间件</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/middleware/mq/" class="nav-link">
+  消息中间件
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="编程语言" class="dropdown-title"><span class="title">编程语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="编程语言" class="mobile-dropdown-title"><span class="title">编程语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/php/" class="nav-link">
+  PHP
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他工具" class="dropdown-title"><span class="title">其他工具</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他工具" class="mobile-dropdown-title"><span class="title">其他工具</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docker/" class="nav-link">
+  Docker
+</a></li></ul></div></div><div class="nav-item"><a href="/book/" class="nav-link">
+  书籍📚
+</a></div> <a href="https://github.com/lemoba/lemoba.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Redis开发与运维</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/redis/redis-devops/1-install.html" class="sidebar-link">安装</a></li><li><a href="/redis/redis-devops/2-persistence.html" class="sidebar-link">持久化</a></li><li><a href="/redis/redis-devops/3-replication.html" class="sidebar-link">复制</a></li><li><a href="/redis/redis-devops/4-sentinel.html" aria-current="page" class="active sidebar-link">哨兵</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/redis/redis-devops/4-sentinel.html#前置概念" class="sidebar-link">前置概念</a></li><li class="sidebar-sub-header"><a href="/redis/redis-devops/4-sentinel.html#_1-主从复制的问题" class="sidebar-link">1. 主从复制的问题</a></li><li class="sidebar-sub-header"><a href="/redis/redis-devops/4-sentinel.html#_2-redis-sentinel的高可用" class="sidebar-link">2. Redis Sentinel的高可用</a></li><li class="sidebar-sub-header"><a href="/redis/redis-devops/4-sentinel.html#_3-部署和安装" class="sidebar-link">3. 部署和安装</a></li><li class="sidebar-sub-header"><a href="/redis/redis-devops/4-sentinel.html#_4-api" class="sidebar-link">4. API</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Redis45讲</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Redis设计与实现</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="哨兵模式"><a href="#哨兵模式" class="header-anchor">#</a> 哨兵模式</h1> <h2 id="前置概念"><a href="#前置概念" class="header-anchor">#</a> 前置概念</h2> <table><thead><tr><th>名词</th> <th>逻辑结构</th> <th>物理结构</th></tr></thead> <tbody><tr><td>主节点(master)</td> <td>redis主库</td> <td>一个独立的redis进程</td></tr> <tr><td>从节点(slave)</td> <td>redis从库</td> <td>一个独立的redis进程</td></tr> <tr><td>Redis数据节点</td> <td>主节点和从节点</td> <td>主节点和从节点进程</td></tr> <tr><td>Sentinel节点</td> <td>监控redis数据节点</td> <td>一个独立的sentinel进程</td></tr> <tr><td>Sentinel节点集合</td> <td>若干个sentinel节点的抽象组合</td> <td>若干sentinel节点进程</td></tr> <tr><td>Redis Sentinel</td> <td>redis高可用解决方案</td> <td>sentinel节点集合和redis数据节点进程</td></tr> <tr><td>应用方</td> <td>一个或多个客户端</td> <td>一个或多个客户端进程</td></tr></tbody></table> <h2 id="_1-主从复制的问题"><a href="#_1-主从复制的问题" class="header-anchor">#</a> 1. 主从复制的问题</h2> <h3 id="_1-1-什么是主从复制"><a href="#_1-1-什么是主从复制" class="header-anchor">#</a> 1.1 什么是主从复制？</h3> <blockquote><p>启动两个独立的redis进程，一个为主节点另一个为从节点。在主从复制模式下，可以将主节点的数据改变同步给从节点</p></blockquote> <p><strong>优点</strong></p> <ul><li>从节点作为备份，当主节点出现故障时，可以顶替主节点，尽力保证数据不丢失。</li> <li>一旦主节点不能支撑大并发量的读操作，从节点可以分担主节点读压力</li></ul> <p><strong>缺点</strong></p> <ul><li>需要手动晋升为主节点，需要修改应用方的主节点地址，还需要命令其他从节点去复制新的主节点</li> <li>主节点性能受单机的限制</li> <li>主节点的存储能力受单机的限制</li></ul> <h3 id="_1-2-高可用"><a href="#_1-2-高可用" class="header-anchor">#</a> 1.2 高可用</h3> <p><strong>如何进行故障转移</strong></p> <ul><li>如果主节点无法正常启动，需要一个从节点对其执行salveof no one命令使其成为主节点</li> <li>原来的从节点成为主节点后，更新应用方的主节点信息</li> <li>其他从节点去复制新的主节点</li> <li>待原来的主节点恢复后，让它去复制新的注解</li></ul> <p><strong>缺点</strong></p> <ul><li>一旦出现节点故障，需要人工干预进行故障转移</li> <li>应用方无法即时感知到主节点的变化，从而造成一定的写数据丢失和读数据错误</li></ul> <h2 id="_2-redis-sentinel的高可用"><a href="#_2-redis-sentinel的高可用" class="header-anchor">#</a> 2. Redis Sentinel的高可用</h2> <blockquote><p>Redis Sentinel是一个分布式架构，其中包含若干个Sentinel节点和Redis数据节点，每个Sentinel节点会对数据节点和其他Sentinel节点监控</p></blockquote> <p><strong>特性</strong></p> <ul><li>自动完成故障发现</li> <li>自动进行故障转移</li></ul> <p><strong>具体操作</strong></p> <ul><li>当发现节点不可达时，会对节点做下线标识</li> <li>当被标识的节点是主节点时，它会和其他Sentinel节点进行协商(多数同意)，然后选举出一个Sentinel节点完成自动故障转移的工作，同时通知给应用方</li></ul> <h2 id="_3-部署和安装"><a href="#_3-部署和安装" class="header-anchor">#</a> 3. 部署和安装</h2> <h3 id="_3-1-部署数据节点"><a href="#_3-1-部署数据节点" class="header-anchor">#</a> 3.1 部署数据节点</h3> <p><strong>配置文件</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 1个主节点</span>
+<span class="token comment"># redis-6379.conf</span>
+port <span class="token number">6379</span>
+<span class="token comment"># requirepass xxxxx # 设置密码</span>
+daemonize <span class="token function">yes</span>
+pidfile <span class="token string">&quot;/var/run/redis_6379.pid&quot;</span>
+logfile <span class="token string">&quot;/data/redis/log/redis-6379.log&quot;</span>
+dbfilename <span class="token string">&quot;dump-6379.rdb&quot;</span>
+<span class="token function">dir</span> <span class="token string">&quot;/Data/redis/data&quot;</span>
+
+<span class="token comment"># 2个从节点</span>
+<span class="token comment"># redis-6380.conf</span>
+port <span class="token number">6380</span>
+<span class="token comment"># masterauth xxxxx # 主节点密码</span>
+daemonize <span class="token function">yes</span>
+pidfile <span class="token string">&quot;/var/run/redis_6380.pid&quot;</span>
+logfile <span class="token string">&quot;/Data/redis/log/redis-6380.log&quot;</span>
+dbfilename <span class="token string">&quot;dump-6380.rdb&quot;</span>
+<span class="token function">dir</span> <span class="token string">&quot;/Data/redis/data&quot;</span>
+slaveof <span class="token number">127.0</span>.0.1 <span class="token number">6379</span>
+
+<span class="token comment"># redis-6381.conf</span>
+port <span class="token number">6381</span>
+<span class="token comment"># masterauth xxxxx # 主节点密码</span>
+daemonize <span class="token function">yes</span>
+pidfile <span class="token string">&quot;/var/run/redis_6381.pid&quot;</span>
+logfile <span class="token string">&quot;/Data/redis/log/redis-6381.log&quot;</span>
+dbfilename <span class="token string">&quot;dump-6381.rdb&quot;</span>
+<span class="token function">dir</span> <span class="token string">&quot;/Data/redis/data&quot;</span>
+slaveof <span class="token number">127.0</span>.0.1 <span class="token number">6379</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p><strong>启动</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 启动主节点</span>
+redis-server redis-6379.conf
+<span class="token comment"># 检测</span>
+redis-cli -h <span class="token number">127.0</span>.0.1 -p <span class="token number">6379</span> <span class="token function">ping</span>
+<span class="token operator">&gt;</span> PONG <span class="token comment"># 启动完成</span>
+
+<span class="token comment"># 启动从节点</span>
+redis-server redis-6380.conf
+redis-server redis-6381.conf
+
+<span class="token comment"># 检测</span>
+redis-cli -h <span class="token number">127.0</span>.0.1 -p <span class="token number">638</span> <span class="token function">ping</span>
+redis-cli -h <span class="token number">127.0</span>.0.1 -p <span class="token number">6381</span> <span class="token function">ping</span>
+<span class="token operator">&gt;</span> PONG <span class="token comment"># 启动完成</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><strong>确定主从关系</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 主视角</span>
+redis-cli -h <span class="token number">127.0</span>.0.1 -p <span class="token number">6379</span> info replication
+
+<span class="token comment"># Replication</span>
+role:slave
+master_host:127.0.0.1
+master_port:6381
+master_link_status:down
+master_last_io_seconds_ago:-1
+master_sync_in_progress:0
+slave_repl_offset:0
+master_link_down_since_seconds:1650439990
+slave_priority:100
+slave_read_only:1
+<span class="token punctuation">..</span>.
+
+<span class="token comment"># 从视角</span>
+redis-cli -h <span class="token number">127.0</span>.0.1 -p <span class="token number">6380</span> info replication
+
+<span class="token comment"># Replication</span>
+role:slave
+master_host:127.0.0.1
+master_port:6379
+master_link_status:up
+master_last_io_seconds_ago:5
+master_sync_in_progress:0
+slave_repl_offset:224
+slave_priority:100
+slave_read_only:1
+<span class="token punctuation">..</span>.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><h3 id="_3-2-部署sentinel节点"><a href="#_3-2-部署sentinel节点" class="header-anchor">#</a> 3.2 部署Sentinel节点</h3> <p><strong>配置文件</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">cp</span> /usr/local/redis/sentinel.conf ./
+<span class="token function">cat</span> sentinel.conf <span class="token operator">|</span><span class="token function">grep</span> -v <span class="token string">'#'</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">'^$'</span> <span class="token operator">&gt;</span> redis-sentinel-26379.conf
+
+<span class="token comment"># redis-sentinel-26379.conf</span>
+port <span class="token number">26379</span>
+daemonize <span class="token function">yes</span>
+pidfile /var/run/redis-sentinel-26379.pid
+logfile <span class="token string">&quot;/Data/redis/log/redis-sentinel-26379.log&quot;</span>
+<span class="token function">dir</span> /Data/redis/data
+sentinel monitor mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6379</span> <span class="token number">2</span>	
+sentinel down-after-milliseconds mymaster <span class="token number">30000</span>				
+sentinel parallel-syncs mymaster <span class="token number">1</span>							
+sentinel failover-timeout mymaster <span class="token number">180000</span>
+<span class="token comment"># sentinel auth-pass mymaster xxxxx # 主节点密码</span>
+			
+
+<span class="token comment"># redis-sentinel-26380.conf</span>
+port <span class="token number">26380</span>
+daemonize <span class="token function">yes</span>
+pidfile /var/run/redis-sentinel-26380.pid
+logfile <span class="token string">&quot;/Data/redis/log/redis-sentinel-26380.log&quot;</span>
+<span class="token function">dir</span> /Data/redis/data
+sentinel monitor mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6379</span> <span class="token number">2</span>
+sentinel down-after-milliseconds mymaster <span class="token number">30000</span>
+sentinel parallel-syncs mymaster <span class="token number">1</span>
+sentinel failover-timeout mymaster <span class="token number">180000</span>
+<span class="token comment"># sentinel auth-pass mymaster xxxxx # 主节点密码</span>
+
+<span class="token comment"># redis-sentinel-26381.conf</span>
+port <span class="token number">26381</span>
+daemonize <span class="token function">yes</span>
+pidfile /var/run/redis-sentinel-26381.pid
+logfile <span class="token string">&quot;/Data/redis/log/redis-sentinel-26381.log&quot;</span>
+<span class="token function">dir</span> /Data/redis/data
+sentinel monitor mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6379</span> <span class="token number">2</span>
+sentinel down-after-milliseconds mymaster <span class="token number">30000</span>
+sentinel parallel-syncs mymaster <span class="token number">1</span>
+sentinel failover-timeout mymaster <span class="token number">180000</span>
+<span class="token comment"># sentinel auth-pass mymaster xxxxx # 主节点密码</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><p><strong>启动</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>redis-sentinel redis-sentinel-26379.conf
+redis-sentinel redis-sentinel-26380.conf
+redis-sentinel redis-sentinel-26381.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><strong>启动后配置变化</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>port <span class="token number">26379</span>
+daemonize <span class="token function">yes</span>
+pidfile <span class="token string">&quot;/var/run/redis-sentinel-26379.pid&quot;</span>
+logfile <span class="token string">&quot;/Data/redis/log/redis-sentinel-26379.log&quot;</span>
+<span class="token function">dir</span> <span class="token string">&quot;/Data/redis/data&quot;</span>
+sentinel myid 3ee1d97bcb05cecc0d38d85b742f5d814d6b95fe
+sentinel deny-scripts-reconfig <span class="token function">yes</span>
+sentinel monitor mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6379</span> <span class="token number">2</span>
+sentinel config-epoch mymaster <span class="token number">0</span>
+sentinel leader-epoch mymaster <span class="token number">0</span>
+<span class="token comment"># Generated by CONFIG REWRITE</span>
+protected-mode no
+
+<span class="token comment"># 发现两个从节点</span>
+sentinel known-replica mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6380</span>
+sentinel known-replica mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6381</span>
+
+<span class="token comment"># 发现两个sentinel节点</span>
+sentinel known-sentinel mymaster <span class="token number">127.0</span>.0.1 <span class="token number">26381</span> a854b87c13bbf17c73f5c38bbda3ab82ae905d1a
+sentinel known-sentinel mymaster <span class="token number">127.0</span>.0.1 <span class="token number">26380</span> 9019b0f763b194fd1ad5f94af61a7a26b2f66fdf
+sentinel current-epoch <span class="token number">0</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p><strong>确认Sentinel节点关系</strong></p> <blockquote><p>Sentinel结点会自动发现从结点和其他Sentinel结点</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>redis-cli -h <span class="token number">127.0</span>.0.1 -p <span class="token number">26379</span> info Sentinel
+
+<span class="token comment"># Sentinel</span>
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name<span class="token operator">=</span>mymaster,status<span class="token operator">=</span>ok,address<span class="token operator">=</span><span class="token number">127.0</span>.0.1:6379,slaves<span class="token operator">=</span><span class="token number">2</span>,sentinels<span class="token operator">=</span><span class="token number">3</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="_3-3-配置参数"><a href="#_3-3-配置参数" class="header-anchor">#</a> 3.3 配置参数</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 设置监控的主节点 &lt;master-name&gt; &lt;ip&gt; &lt;port&gt; &lt;quorum&gt;</span>
+sentinel monitor mymaster <span class="token number">127.0</span>.0.1 <span class="token number">6379</span> <span class="token number">2</span>  
+
+<span class="token comment"># 超时设置，超过这个时间则判定改节点不可达，单位毫秒</span>
+sentinel down-after-milliseconds mymaster <span class="token number">30000</span>    
+
+<span class="token comment"># 故障转移时，同时向主节点发起复制的从节点个数</span>
+sentinel parallel-syncs mymaster <span class="token number">1</span>
+
+<span class="token comment"># 故障转移超时时间，包括选合适的从节点、从节点晋升主节点、其他节点复制新的主节点、等待原主节点复制新的主节点</span>
+sentinel failover-timeout mymaster <span class="token number">180000</span>       
+
+<span class="token comment"># 禁止脚本动态配置</span>
+sentinel deny-scripts-reconfig <span class="token function">yes</span>
+
+<span class="token comment"># 如果sentinel监控的主节点配置了密码，则需要添加</span>
+sentinel auth-pass      
+
+<span class="token comment"># 在故障转移期间，当一些警告级别的事件发生，则触发对应路径的脚本</span>
+sentinel notification-script <span class="token operator">&lt;</span>master-name<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>  
+
+<span class="token comment"># 参数:</span>
+<span class="token comment"># 1.主节点名称:master-name </span>
+<span class="token comment"># 2.sentinel节点角色:role </span>
+<span class="token comment"># 3.from-ip:原主节点ip </span>
+<span class="token comment"># 4.from-port:原主节点端口 </span>
+<span class="token comment"># 5.to-ip:新&gt;主节点ip </span>
+<span class="token comment"># 6.to-port:新主节点的端口 </span>
+<span class="token comment"># 7.script-path:必须有可执行权限</span>
+sentinel client-reconfig-script <span class="token operator">&lt;</span>master-name<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>    
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><h2 id="_4-api"><a href="#_4-api" class="header-anchor">#</a> 4. API</h2> <p><strong>1. sentinel masters</strong></p> <blockquote><p>展示所有被监控的主节点状态以及相关的统计信息</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>redis-cli -h <span class="token number">127.0</span>.0.1 -p <span class="token number">26379</span>
+sentinel masters
+<span class="token number">1</span><span class="token punctuation">)</span>  <span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">&quot;name&quot;</span>
+    <span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;mymaster&quot;</span>
+    <span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">&quot;ip&quot;</span>
+    <span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">&quot;127.0.0.1&quot;</span>
+    <span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">&quot;port&quot;</span>
+    <span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">&quot;6379&quot;</span>
+    <span class="token number">7</span><span class="token punctuation">)</span> <span class="token string">&quot;runid&quot;</span>
+    <span class="token number">8</span><span class="token punctuation">)</span> <span class="token string">&quot;3969ddfb7e22218712bc4a2beac9187bba5a489e&quot;</span>
+    <span class="token number">9</span><span class="token punctuation">)</span> <span class="token string">&quot;flags&quot;</span>
+   <span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">&quot;master&quot;</span>
+   <span class="token punctuation">..</span>.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>2. sentinel masters (master name)</strong></p> <blockquote><p>展示指定master name 的主节点状态以及相关的统计信息</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>sentinel master mymaster
+
+<span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">&quot;name&quot;</span>
+ <span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;mymaster&quot;</span>
+ <span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">&quot;ip&quot;</span>
+ <span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">&quot;127.0.0.1&quot;</span>
+ <span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">&quot;port&quot;</span>
+ <span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">&quot;6379&quot;</span>
+ <span class="token number">7</span><span class="token punctuation">)</span> <span class="token string">&quot;runid&quot;</span>
+ <span class="token number">8</span><span class="token punctuation">)</span> <span class="token string">&quot;3969ddfb7e22218712bc4a2beac9187bba5a489e&quot;</span>
+ <span class="token number">9</span><span class="token punctuation">)</span> <span class="token string">&quot;flags&quot;</span>
+<span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">&quot;master&quot;</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>3. sentinel slavers (master name)</strong></p> <blockquote><p>展示指定master name 的从节点状态以及相关的统计信息</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>sentinel slaves mymaster
+
+<span class="token number">1</span><span class="token punctuation">)</span>  <span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">&quot;name&quot;</span>
+    <span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;127.0.0.1:6380&quot;</span>
+    <span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">&quot;ip&quot;</span>
+    <span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">&quot;127.0.0.1&quot;</span>
+    <span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">&quot;port&quot;</span>
+    <span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">&quot;6380&quot;</span>
+    <span class="token number">7</span><span class="token punctuation">)</span> <span class="token string">&quot;runid&quot;</span>
+    <span class="token number">8</span><span class="token punctuation">)</span> <span class="token string">&quot;b674e1b23fe90132c5923af2cf80eb89060da169&quot;</span>
+    <span class="token number">9</span><span class="token punctuation">)</span> <span class="token string">&quot;flags&quot;</span>
+   <span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">&quot;slave&quot;</span>
+<span class="token punctuation">..</span>.
+<span class="token number">2</span><span class="token punctuation">)</span>  <span class="token number">1</span><span class="token punctuation">)</span> <span class="token string">&quot;name&quot;</span>
+    <span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;127.0.0.1:6381&quot;</span>
+    <span class="token number">3</span><span class="token punctuation">)</span> <span class="token string">&quot;ip&quot;</span>
+    <span class="token number">4</span><span class="token punctuation">)</span> <span class="token string">&quot;127.0.0.1&quot;</span>
+    <span class="token number">5</span><span class="token punctuation">)</span> <span class="token string">&quot;port&quot;</span>
+    <span class="token number">6</span><span class="token punctuation">)</span> <span class="token string">&quot;6381&quot;</span>
+    <span class="token number">7</span><span class="token punctuation">)</span> <span class="token string">&quot;runid&quot;</span>
+    <span class="token number">8</span><span class="token punctuation">)</span> <span class="token string">&quot;7b0360797367a2b1053cd103f5009d808cc3344d&quot;</span>
+    <span class="token number">9</span><span class="token punctuation">)</span> <span class="token string">&quot;flags&quot;</span>
+   <span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">&quot;slave&quot;</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><h3 id="_5-实现原理"><a href="#_5-实现原理" class="header-anchor">#</a> 5. 实现原理</h3> <h4 id="_5-1-三个定时任务"><a href="#_5-1-三个定时任务" class="header-anchor">#</a> 5.1 三个定时任务</h4> <blockquote><p>Redis Sentinel通过三个定时监控任务完成对各个节点发现和监控</p></blockquote> <p><strong>1) 每隔10秒，每隔Sentinel节点会向主节点和从结点发送info命令获取最新的拓扑结构</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>info replication
+
+<span class="token comment"># Replication</span>
+role:master
+connected_slaves:2
+slave0:ip<span class="token operator">=</span><span class="token number">127.0</span>.0.1,port<span class="token operator">=</span><span class="token number">6380</span>,state<span class="token operator">=</span>online,offset<span class="token operator">=</span><span class="token number">8192</span>,lag<span class="token operator">=</span><span class="token number">1</span>
+slave1:ip<span class="token operator">=</span><span class="token number">127.0</span>.0.1,port<span class="token operator">=</span><span class="token number">6379</span>,state<span class="token operator">=</span>online,offset<span class="token operator">=</span><span class="token number">8591</span>,lag<span class="token operator">=</span><span class="token number">1</span>
+master_replid:011883384c243af15a88fb528a48eb9d058b7b2a
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:8591
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:8591
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><strong>作用</strong></p> <ul><li>通过向主节点执行info命令，可以获取从节点信息，从而不需要显示配置从节点</li> <li>当有新节点加入都可以进行感知</li> <li>当节点不可达或者故障转移后，可以使用info实时更新节点信息</li></ul> <p><strong>2）每隔2秒，每个Sentinel节点会向Redis的数据结点的__sentinel__:hello频道发送Sentinel节点对主节点的判断以及当前Sentinel节点的信息，同时每个Sentinel节点也会订阅改频道，来了解其他Sentinel节点以及它们对主节点的判断</strong></p> <p><strong>作用</strong></p> <ul><li>发现新的Sentinel节点，了解其他节点信息，如果有新节点加入则保存信息并创建连接</li> <li>Sentinel节点之间交换主节点的状态，作为后面客观下线以及领导者选举的依据</li></ul> <p><strong>3）每隔1秒，每个Sentinel节点会向主节点、从节点、其他Sentinel节点发送一条ping命令做一次心跳检测，来确认这个节点当前是否可达</strong></p> <h4 id="_5-2-主-客观下线"><a href="#_5-2-主-客观下线" class="header-anchor">#</a> 5.2 主/客观下线</h4> <p><strong>1）主观下线</strong></p> <blockquote><p><strong>一家之言，存在误判</strong></p></blockquote> <p>当前Sentinel节点每隔1s会向数据节点和其他Sentinel节点发送心跳检测，当这些节点超过down-after-milliseconds没有进行回复，就对该节点做失败判定</p> <p><strong>2）客观下线</strong></p> <p>当Sentinel主观下线的节点时主节点时，改Sentinel节点会通过<strong>sentinel is-master-down-by-addr</strong>命令向其他Sentinel节点询问对主节点的判断，当超过quronum个数，Sentinel节点认为主节点确实有问题，这是便做出客观下线的决定。</p> <h3 id="_5-3-sentinel领导选举"><a href="#_5-3-sentinel领导选举" class="header-anchor">#</a> 5.3 Sentinel领导选举</h3> <blockquote><p>Redis Sentinel使用Raft算法实现领导者选举</p></blockquote> <p>当Sentinel节点对主节点做了客观下线的决定后，并不是立刻进行故障转移，而是Sentinel节点之间会做一个领导者选举的工作，选出一个Sentinel节点作为领导者进行故障转移。</p> <p><strong>选举大概步骤</strong></p> <ul><li>每个S节点都是潜在成为领导的节点，当它确认主节点主观下线时，会向其他S节点发送sentinel is-master-down-by-addr命令来毛遂自荐设置自己为领导者。</li> <li>收到命令的S节点，如果没有同意其他S节点的毛遂自荐就拒绝，反之同意其请求。</li> <li>如果该S节点发现自己的票数已经超过max(quornum, num(sentinels) / 2 + 1)，则称为领导者。</li> <li>如果此轮没有选举出领导者，将进入下一轮选举</li></ul> <p>**notes：**每个Sentinel节点只有一次投票权</p> <h3 id="_5-4-故障转移"><a href="#_5-4-故障转移" class="header-anchor">#</a> 5.4 故障转移</h3> <p><strong>1）从节点列表中选出一个节点作为新的节点作为新的主节点，选择方法如下</strong></p> <ul><li>过滤：&quot;不健康(主观下线、断线)&quot; 5秒内没有回复过Sentinel节点ping响应、与主节点失联超过down-after-milliseconds*10秒。</li> <li>选择salve-priority(从节点优先级)最高的从节点列表，如果存在则返回，不存在则继续。</li> <li>选择复制偏移量最大的从节点(复制的最完成)，如果存在则返回，不存在则继续。</li> <li>选择runid最小的从节点。</li></ul> <p><strong>2）Sentinel领导者节点会对第一步选出来的从节点执行salveof no one命令让其称为主节点</strong></p> <p><strong>3）Sentinel领导者节点会向剩余的从节点发送命令，让他们成为新从节点的从节点，复制规则和parallel-syncs相关</strong></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/lemoba/lemoba.github.io/edit/main/docs/redis/redis-devops/4-sentinel.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页 ！</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">5/17/2022, 3:56:01 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/redis/redis-devops/3-replication.html" class="prev">
+        复制
+      </a></span> <span class="next"><a href="/redis/redis-45/1-basic.html">
+        基本架构
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.d008bd4a.js" defer></script><script src="/assets/js/2.c3ba2a3e.js" defer></script><script src="/assets/js/76.f690a52c.js" defer></script>
+  </body>
+</html>
